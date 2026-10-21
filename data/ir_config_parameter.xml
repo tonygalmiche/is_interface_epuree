@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- À l'installation seulement (noupdate) : options standard modifiables ensuite dans Paramètres → Généraux,
+         un -u ne les remet pas -->
+    <data noupdate="1">
+        <!-- Inscription libre fermée : sur invitation (b2c par défaut, posé par auth_signup) -->
+        <function model="ir.config_parameter" name="set_str" eval="('auth_signup.invitation_scope', 'b2b')"/>
+        <!-- Réinitialisation du mot de passe désactivée -->
+        <function model="ir.config_parameter" name="set_bool" eval="('auth_signup.reset_password', False)"/>
+    </data>
+</odoo>

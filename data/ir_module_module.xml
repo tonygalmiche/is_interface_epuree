@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- À l'installation seulement (noupdate) : clé d'accès (WebAuthn) jamais utilisée, modules marqués « à désinstaller »
+         (button_uninstall), désinstallés à la fin du chargement (étape 5 de odoo/modules/loading.py).
+         Sans effet s'ils sont déjà désinstallés (recherche vide) ; un -u ne fait rien : auth_passkey peut être réinstallé -->
+    <data noupdate="1">
+        <function model="ir.module.module" name="button_uninstall">
+            <value model="ir.module.module" search="[('name', 'in', ('auth_passkey', 'auth_passkey_portal')), ('state', 'in', ('installed', 'to upgrade'))]"/>
+        </function>
+    </data>
+</odoo>
