@@ -1,28 +1,75 @@
-# is_interface_epuree
+# Interface épurée
 
-Module Odoo 20 développé par [InfoSaône](http://www.infosaone.com) : page de connexion épurée et publicité pour Odoo Enterprise retirée de l'interface, sans fichiers recopiés dans chaque module client.
+[![Licence : AGPL-3](https://img.shields.io/badge/licence-AGPL--3-blue.png)](http://www.gnu.org/licenses/agpl-3.0-standalone.html)
+[![Odoo 20.0](https://img.shields.io/badge/odoo-20.0-875A7B.png)](https://github.com/tonygalmiche/is_interface_epuree/tree/20.0)
 
-Cahier des charges : `~/Documents/Développement/Documentation/modules-generiques/is_interface_epuree.md`.
+Ce module épure la page de connexion d'Odoo et retire de l'interface la publicité pour Odoo Enterprise.
 
-## Ce qui change
+Page de connexion :
 
-| Élément | Module |
-|---|---|
-| Lien « Pas encore de compte ? » | Inscription sur invitation (`b2b`) **à l'installation** ; réactivable dans Paramètres → Généraux → Accès client |
-| Lien « Réinitialiser le mot de passe » | Désactivé **à l'installation** ; réactivable dans Paramètres → Généraux |
-| Connexion en superutilisateur | Supprimée : bouton de la page de connexion, entrée du menu de débogage, route `/web/become` (404) |
-| Pied de page « Gérer les bases » et « Généré par Odoo » | Toujours masqué (le gestionnaire de bases reste réglé par `list_db`) |
-| Clé d'accès (`auth_passkey`, `auth_passkey_portal`) | Désinstallés **à l'installation** ; un `-u` ne fait rien |
-| Modules Enterprise dans Applications | Masqués (filtre `to_buy = False` sur l'action) |
-| Options « Entreprise » des Paramètres | Retirées, avec les blocs devenus vides |
+- inscription sur invitation et réinitialisation du mot de passe désactivée à l'installation (réactivables) ;
+- connexion en superutilisateur supprimée ;
+- pied de page « Gérer les bases » et « Généré par Odoo » masqué ;
+- clé d'accès (`auth_passkey`, `auth_passkey_portal`) désinstallée à l'installation.
 
-Les réglages faits à l'installation (fichiers `data/` en `noupdate`) ne sont jamais remis par un `-u`.
+Publicité pour Odoo Enterprise :
 
-## Fonctionnement
+- modules Enterprise (bouton « Mettre à niveau ») masqués dans Applications ;
+- options « Entreprise » retirées des Paramètres, ainsi que les sections devenues vides.
 
-- `views/login_templates.xml` : héritage de `web.login_layout` (pied de page) et `web.login` (bouton superutilisateur).
-- `controllers/main.py` : `/web/become` renvoie une 404.
-- `static/src/js/debug_menu.js` : entrée « Devenir superutilisateur » retirée du menu de débogage.
-- `views/ir_module_module_views.xml` : filtre sur l'action Applications (`base.open_module_tree`), retiré par `uninstall_hook`.
-- `models/res_config_settings.py` : `_get_view` retire les `<setting>` des champs `widget="upgrade_boolean"`, puis les `<block>` vides.
-- `data/ir_config_parameter.xml`, `data/ir_module_module.xml` : réglages et désinstallation à l'installation seulement.
+**Table des matières**
+
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Utilisation](#utilisation)
+- [Problèmes connus / Feuille de route](#problèmes-connus--feuille-de-route)
+- [Signaler un problème](#signaler-un-problème)
+- [Crédits](#crédits)
+
+## Installation
+
+Installer le module depuis Applications. À l'installation :
+
+- l'accès client passe sur « Sur invitation » ;
+- la réinitialisation du mot de passe est désactivée ;
+- les modules `auth_passkey` et `auth_passkey_portal` sont désinstallés.
+
+Ces réglages ne sont faits qu'une fois : une mise à jour du module ne les remet pas.
+
+## Configuration
+
+Le module n'ajoute aucune option. Les réglages standard restent modifiables dans *Paramètres → Paramètres généraux* :
+
+- **Accès client** « Inscription libre » : réaffiche le lien « Pas encore de compte ? » ;
+- **Réinitialisation du mot de passe** : réaffiche le lien « Réinitialiser le mot de passe ».
+
+Pour utiliser les clés d'accès, réinstaller `auth_passkey`.
+
+Le gestionnaire de bases reste réglé comme en standard par le fichier de configuration d'Odoo (`list_db`) : seul son lien dans le pied de page disparaît.
+
+## Utilisation
+
+Rien à faire : la page de connexion, Applications et les Paramètres sont épurés dès l'installation, y compris pour les applications installées ensuite.
+
+## Problèmes connus / Feuille de route
+
+- Sur une base neuve, si `auth_passkey` est installé en même temps que ce module, il peut rester installé : le désinstaller une fois depuis Applications.
+- La désinstallation du module rend la page de connexion standard, la connexion en superutilisateur et l'affichage des modules et options Enterprise. Les modules de clé d'accès ne sont pas réinstallés.
+
+## Signaler un problème
+
+Les problèmes se signalent sur [GitHub Issues](https://github.com/tonygalmiche/is_interface_epuree/issues).
+
+## Crédits
+
+### Auteurs
+
+- InfoSaône
+
+### Contributeurs
+
+- Tony Galmiche ([InfoSaône](http://www.infosaone.com))
+
+### Mainteneurs
+
+Ce module est maintenu par [InfoSaône](http://www.infosaone.com).
