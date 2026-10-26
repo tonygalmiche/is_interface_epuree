@@ -53,7 +53,7 @@ Rien à faire : la page de connexion, Applications et les Paramètres sont épur
 
 ## Problèmes connus / Feuille de route
 
-- Sur une base neuve, si `auth_passkey` est installé en même temps que ce module, il peut rester installé : le désinstaller une fois depuis Applications.
+- Sur une base neuve, `auth_passkey_portal` (installé automatiquement avec `portal`) restait installé sans `auth_passkey` (« Some modules are not loaded… ['auth_passkey_portal'] » à chaque démarrage) : corrigé par la dépendance à `portal`, qui fait charger ce module après lui. Sur une base où c'est déjà arrivé : désinstaller `auth_passkey_portal` depuis Applications.
 - La désinstallation du module rend la page de connexion standard, la connexion en superutilisateur et l'affichage des modules et options Enterprise. Les modules de clé d'accès ne sont pas réinstallés.
 
 ## Signaler un problème

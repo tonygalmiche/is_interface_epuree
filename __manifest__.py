@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "InfoSaône - Interface épurée pour Odoo 20",
-    "version": "20.0.1.0.0",
+    "version": "20.0.1.0.1",
     "author": "InfoSaône / Tony Galmiche",
     "category": "InfoSaône",
     "summary": "Page de connexion épurée, inscription sur invitation, clé d'accès désinstallée, publicité Enterprise masquée",
@@ -16,6 +16,10 @@
     "depends": [
         'auth_signup',
         'base_setup',
+        # Chargé après auth_passkey_portal (installé automatiquement avec portal) sur une base neuve, pour que
+        # data/ir_module_module.xml le trouve installé et le désinstalle avec auth_passkey (même profondeur dans le
+        # graphe des modules, ordre alphabétique)
+        'portal',
         'web',
     ],
     "data": [
