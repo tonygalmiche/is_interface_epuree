@@ -8,4 +8,11 @@
             <value model="ir.module.module" search="[('name', 'in', ('auth_passkey', 'auth_passkey_portal')), ('state', 'in', ('installed', 'to upgrade'))]"/>
         </function>
     </data>
+
+    <!-- À chaque installation et mise à jour : mysubscription (auto_install, menu « My Subscription ») désinstallé.
+         Son tableau de bord appelle /web/database/list à l'ouverture, ce qui fait bannir l'utilisateur par la jail
+         fail2ban odoo-dbmanager (maxretry = 1) -->
+    <function model="ir.module.module" name="button_uninstall">
+        <value model="ir.module.module" search="[('name', '=', 'mysubscription'), ('state', 'in', ('installed', 'to upgrade'))]"/>
+    </function>
 </odoo>

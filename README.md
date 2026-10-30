@@ -15,7 +15,8 @@ Page de connexion :
 Publicité pour Odoo Enterprise :
 
 - modules Enterprise (bouton « Mettre à niveau ») masqués dans Applications ;
-- options « Entreprise » retirées des Paramètres, ainsi que les sections devenues vides.
+- options « Entreprise » retirées des Paramètres, ainsi que les sections devenues vides ;
+- menu « My Subscription » (`mysubscription`, abonnement Odoo.com) désinstallé à chaque installation et mise à jour : son tableau de bord appelle `/web/database/list`, ce qui fait bannir l'utilisateur par une jail fail2ban qui surveille le gestionnaire de bases.
 
 **Table des matières**
 

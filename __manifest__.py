@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "InfoSaône - Interface épurée pour Odoo 20",
-    "version": "20.0.1.0.1",
+    "version": "20.0.1.0.2",
     "author": "InfoSaône / Tony Galmiche",
     "category": "InfoSaône",
     "summary": "Page de connexion épurée, inscription sur invitation, clé d'accès désinstallée, publicité Enterprise masquée",
@@ -10,6 +10,7 @@
         À l'installation seulement : inscription sur invitation, réinitialisation du mot de passe désactivée,
         clé d'accès (auth_passkey) désinstallée ; ces réglages restent modifiables ensuite.
         Modules Enterprise masqués dans Applications, options « Entreprise » retirées des Paramètres.
+        Menu « My Subscription » (mysubscription) désinstallé : il appelle /web/database/list (bannissement fail2ban).
     """,
     "maintainer": "InfoSaône",
     "website": "http://www.infosaone.com",
